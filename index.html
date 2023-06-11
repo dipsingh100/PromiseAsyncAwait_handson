@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Async Await</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="title">Promise Async Await</h1>
+    <div class="question">
+      <h3>
+        Q1. Write one example explaining how you can write a callback function?
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+        function getSum(num1, num2, callback){
+            var sum = num1 + num2;
+            callback(sum);
+        }
+        
+        function displaySum(sum){
+            console.log("Sum is: " + sum);
+        }
+        
+        getSum(2,3,displaySum);
+        </pre>
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q2. "Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Explain callback hell.
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+        setTimeout(() => {
+            console.log("1");
+            setTimeout(() => {
+              console.log("2");
+              setTimeout(() => {
+                console.log("3");
+                setTimeout(() => {
+                  console.log("4");
+                  setTimeout(() => {
+                    console.log("5");
+                    setTimeout(() => {
+                      console.log("6");
+                      setTimeout(() => {
+                        console.log("7");
+                      }, 7000);
+                    }, 6000);
+                  }, 5000);
+                }, 4000);
+              }, 3000);
+            }, 2000);
+          }, 1000);
+        </pre>
+        Callback hell, also known as the pyramid of doom, is a situation that arises when multiple asynchronous operations are nested within each other using callback functions. It occurs when callbacks are used to handle the flow of execution in asynchronous JavaScript code, leading to deeply nested and difficult-to-read code structures. The code will grow horizontally and if one function fail then the whole functions pyramid break.
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q3. "Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+        function delayPrint(number, delay) {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(number);
+              }, delay);
+            });
+          }
+          
+          delayPrint(1,1000).then((val)=>{
+              console.log(val)
+              delayPrint(2,2000).then((val)=>{
+                  console.log(val)
+                  delayPrint(3,3000).then((val)=>{
+                      console.log(val)
+                      delayPrint(4,4000).then((val)=>{
+                          console.log(val)
+                          delayPrint(5,5000).then((val)=>{
+                              console.log(val)
+                              delayPrint(6,6000).then((val)=>{
+                                  console.log(val)
+                                  delayPrint(7,7000).then((val)=>{
+                                      console.log(val)
+                                  })
+                              })
+                          })
+                      })
+                  })
+              })
+          })
+        </pre>
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q4. "Create a promise function accepting an argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and if nothing is passed 
+        then it should go to reject the state and catch the error and print Promise Rejected "?
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+        function promiseFunc(arg){
+            return  new Promise((resolve, reject)=>{
+                if(arg==="yes")
+                    resolve("Promise Resolved");
+                else
+                    reject("Promise Rejected");
+            })
+        }
+        
+        promiseFunc().then((resolvevalue)=>{console.log(resolvevalue)})
+            .catch((rejectvalue)=>{console.log(rejectvalue)})
+        
+        </pre>
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q5. Create examples to explain callback function?
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+        function AgeCalculator(byear,cyear){
+            return cyear-byear
+        }
+        
+        function displayAge(callback,byear,cyear){
+            var age = callback(byear, cyear)
+            console.log("Age is :",age)
+        }
+        
+        displayAge(AgeCalculator, 2001, 2023)
+        </pre>
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q6. Create examples to explain callback hell function?
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+         
+        </pre>
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q7. Create examples to explain promises function?
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+         
+        </pre>
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q8. Create examples to explain async await function?
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+         
+        </pre>
+        <hr>
+    </div>
+    <div class="question">
+      <h3>
+        Q9. Create examples to explain promise.all function?
+        <br />
+        Ans.-
+      </h3>
+      <pre>
+         
+        </pre>
+        <hr>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
