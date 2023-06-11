@@ -159,6 +159,10 @@
         
         displayAge(AgeCalculator, 2001, 2023)
         </pre>
+        The AgeCalculator function takes two parameters: byear (birth year) and cyear (current year). It calculates the difference between the current year and the birth year, representing the person's age. The result is returned.
+        The displayAge function takes three parameters: callback (a callback function), byear, and cyear. It is responsible for displaying the age calculated by the callback function.
+        Inside the displayAge function, the callback function is invoked with byear and cyear as arguments, and the result is stored in the age variable.
+        Finally, the age is displayed using console.log() with the message "Age is:" followed by the value of the age variable.
         <hr>
     </div>
     <div class="question">
@@ -168,8 +172,51 @@
         Ans.-
       </h3>
       <pre>
-         
+        function asyncOperation1(callback) {
+            setTimeout(() => {
+              console.log("Async operation 1");
+              callback();
+            }, 1000);
+          }
+          
+          function asyncOperation2(callback) {
+            setTimeout(() => {
+              console.log("Async operation 2");
+              callback();
+            }, 2000);
+          }
+          
+          function asyncOperation3(callback) {
+            setTimeout(() => {
+              console.log("Async operation 3");
+              callback();
+            }, 3000);
+          }
+          
+          function asyncOperation4(callback) {
+            setTimeout(() => {
+              console.log("Async operation 4");
+              callback();
+            }, 1000);
+          }
+          
+          function startAsyncOperations() {
+            asyncOperation1(() => {
+              asyncOperation2(() => {
+                asyncOperation3(() => {
+                  asyncOperation4(() => {
+                    console.log("All async operations completed");
+                  });
+                });
+              });
+            });
+          }
+          
+          startAsyncOperations();
+          
         </pre>
+        In this example, we have four asynchronous operations (asyncOperation1, asyncOperation2, asyncOperation3, asyncOperation4), each simulating an asynchronous task using setTimeout.
+The startAsyncOperations function initiates a series of nested callbacks to execute the asynchronous operations sequentially. As each operation completes, it calls the next operation in the chain using a callback function. This is an example of callback hell, where multiple levels of nested callbacks create a pyramid-like structure.      
         <hr>
     </div>
     <div class="question">
@@ -179,8 +226,26 @@
         Ans.-
       </h3>
       <pre>
-         
+        function asyncOperation() {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve("Operation completed successfully");
+                reject("An error occurred");
+              }, 2000);
+            });
+          }
+          
+          asyncOperation()
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          
         </pre>
+        In this example, we define an asyncOperation function that returns a promise. Inside the promise, we simulate an asynchronous operation using setTimeout. If the operation is successful, we call resolve with the result. If an error occurs, we call reject with an error message.
+We call the asyncOperation function and use the .then() method to handle the resolved promise, printing the result. We also use the .catch() method to handle any rejected promise, printing the error message.
         <hr>
     </div>
     <div class="question">
@@ -190,8 +255,22 @@
         Ans.-
       </h3>
       <pre>
-         
+        function delay(ms) {
+            return new Promise((resolve) => {
+              setTimeout(resolve, ms);
+            });
+          }
+          
+          async function asyncOperation() {
+            console.log("Start");
+            await delay(2000);
+            console.log("Async operation completed");
+          }
+          
+          asyncOperation();
+          
         </pre>
+        In this example, the asyncOperation function is declared with the async keyword, indicating that it is an asynchronous function. Inside the function, we use the await keyword to wait for the delay promise to resolve. The function execution is paused at the await statement until the promise is resolved. Once the promise is resolved, the execution continues.
         <hr>
     </div>
     <div class="question">
@@ -201,8 +280,26 @@
         Ans.-
       </h3>
       <pre>
-         
+        function delay(ms) {
+            return new Promise((resolve) => {
+              setTimeout(resolve, ms);
+            });
+          }
+          
+          const promise1 = delay(2000).then(() => "Promise 1 resolved");
+          const promise2 = delay(1000).then(() => "Promise 2 resolved");
+          const promise3 = delay(1500).then(() => "Promise 3 resolved");
+          
+          Promise.all([promise1, promise2, promise3])
+            .then((results) => {
+              console.log(results);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          
         </pre>
+        In this example, we have three promises representing asynchronous operations with different delays. We use Promise.all() to wait for all promises to resolve. Once all promises are resolved, the results are passed to the .then() callback and logged. If any of the promises are rejected, the error is caught in the .catch() callback.
         <hr>
     </div>
     <script src="script.js"></script>
