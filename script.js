@@ -61,3 +61,57 @@ function delayPrint(number, delay) {
           })
       })
   })
+
+
+//-----------------------------------Promise Chaining---------------------------
+
+function fetchData(){
+  return new Promise((resolve)=>{
+    setTimeout(()=>{
+      resolve("prepbytes")
+    },1000) 
+  })
+}
+
+function processData(data){
+  return new Promise((resolve)=>{
+    setTimeout(()=>{
+      resolve(`${data} is processed`)
+    },1000) 
+  })
+}
+
+function calculateData(data){
+  return new Promise((resolve)=>{
+    setTimeout(()=>{
+      resolve(data.length)
+    },1000) 
+  })
+}
+
+fetchData().then((data)=>{
+  console.log("first task done", data)
+  return processData(data)
+}).then((data2)=>{
+  console.log("second task is also done",data2)
+  return calculateData(data2)
+}).then((data3)=>{
+  console.log("final task is also done",data3)
+})
+
+
+//----------------Async Await----------
+function try1(){
+  return new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+       resolve("Hello World");
+    },1000);  
+  });
+}
+
+async function run(){
+  let data = await try1()
+  console.log("ans is ",data)
+}
+
+run();

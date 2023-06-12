@@ -279,17 +279,23 @@ We call the asyncOperation function and use the .then() method to handle the res
         <br />
         Ans.-
       </h3>
-      <pre>
-        function delay(ms) {
-            return new Promise((resolve) => {
-              setTimeout(resolve, ms);
-            });
-          }
-          
-          const promise1 = delay(2000).then(() => "Promise 1 resolved");
-          const promise2 = delay(1000).then(() => "Promise 2 resolved");
-          const promise3 = delay(1500).then(() => "Promise 3 resolved");
-          
+      <pre>  
+          const promise1 = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+              resolve("Promise 1 resolved")
+            },2000)
+          });
+          const promise2 = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+              resolve("Promise 2 resolved")
+            },1000)
+          });
+          const promise3 = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+              resolve("Promise 3 resolved")
+            },1500)
+          });
+                    
           Promise.all([promise1, promise2, promise3])
             .then((results) => {
               console.log(results);
